@@ -23,6 +23,7 @@ sed -i -- "s/8005/$3/g" $DEPLOY_PATH/conf/server.xml
 # create execute
 echo "export CATALINA_HOME=$TOMCAT_HOME
 export CATALINA_BASE=$DEPLOY_PATH
+export CATALINA_PID=$DEPLOY_PATH/bin/RUNNING_PID
 \$CATALINA_HOME/bin/startup.sh -Dcatalina.base" > $DEPLOY_PATH/bin/startup.sh
 
 cat $DEPLOY_PATH/bin/startup.sh > $DEPLOY_PATH/bin/start.sh
@@ -30,6 +31,7 @@ echo 'tail -f \$CATALINA_BASE/logs/catalina.out' >> $DEPLOY_PATH/bin/start.sh
 
 echo "export CATALINA_HOME=$TOMCAT_HOME
 export CATALINA_BASE=$DEPLOY_PATH
+export CATALINA_PID=$DEPLOY_PATH/bin/RUNNING_PID
 \$CATALINA_HOME/bin/shutdown.sh -Dcatalina.base" > $DEPLOY_PATH/bin/stop.sh
 
 chmod 750 $DEPLOY_PATH/bin/*
